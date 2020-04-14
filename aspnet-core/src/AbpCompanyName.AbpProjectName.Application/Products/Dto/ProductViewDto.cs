@@ -9,7 +9,12 @@ namespace AbpCompanyName.AbpProjectName.Products.Dto
     {
         public ProductDto Product { get; set; }
 
-        public string ProductCategoryName { get; set; }
+        //if you want ProductCategoryName here uncomment below lines else check inside ProductDto
+        //public ProductCategoryDto ProductCategory { get; set; }
+        //public string ProductCategoryName =>
+        //    !string.IsNullOrEmpty(Product.ProductCategory.Name) ?
+        //    Product.ProductCategory.Name :
+        //    Product.ProductCategory.DefaultName;
 
     }
 }

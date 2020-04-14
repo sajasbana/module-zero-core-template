@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services.Dto;
+using AbpCompanyName.AbpProjectName.ProductCategories.Dto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,9 +8,15 @@ namespace AbpCompanyName.AbpProjectName.Products.Dto
 {
     public class ProductDto : EntityDto
     {
-        public string DefaultName { get; set; }
-
         public int ProductCategoryId { get; set; }
+
+        public ProductCategoryDto ProductCategory { get; set; }
+
+        //this is optional all information needed is in ProductCategory property
+        public string ProductCategoryName =>
+            !string.IsNullOrEmpty(ProductCategory.Name) ?
+            ProductCategory.Name :
+            ProductCategory.DefaultName;
 
         public decimal Price { get; set; }
 

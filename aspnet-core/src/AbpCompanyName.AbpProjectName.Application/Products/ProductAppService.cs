@@ -33,20 +33,14 @@ namespace AbpCompanyName.AbpProjectName.Products
                 .Include(p => p.ProductCategory.Translations)
                 .ToListAsync();
 
+            var c = System.Globalization.CultureInfo.CurrentUICulture.Name;
+
             var governorateList = products
-                .Select(o => new ProductViewDto()
-                {
-                    Product = ObjectMapper.Map<ProductDto>(o),
-                    //to get FK name
-                    //is this can be improved?????????
-                    ProductCategoryName = 
-                    !string.IsNullOrEmpty(ObjectMapper.Map<ProductCategories.Dto.ProductCategoryDto>(o.ProductCategory).Name) ?
-                    ObjectMapper.Map<ProductCategories.Dto.ProductCategoryDto>(o.ProductCategory).Name :
-                    ObjectMapper.Map<ProductCategories.Dto.ProductCategoryDto>(o.ProductCategory).DefaultName
-                })
+                .Select(o => ObjectMapper.Map<ProductDto>(o))
+                //.Select(o => ObjectMapper.Map<ProductViewDto>(o))
                 .ToList();
 
-            return new ListResultDto<ProductDto>(ObjectMapper.Map<List<ProductDto>>(products));
+            return new ListResultDto<ProductDto>(governorateList);
         }
 
         public async Task CreateProduct(ProductCreateDto input)
