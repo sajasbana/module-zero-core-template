@@ -30,7 +30,7 @@ namespace AbpCompanyName.AbpProjectName.EntityFrameworkCore.Seed
             new TenantRoleAndUserBuilder(context, 1).Create();
 
             //App seed
-            new InitialAppDbBuilder(context).Create();
+            //new InitialAppDbBuilder(context).Create();
 
         }
 

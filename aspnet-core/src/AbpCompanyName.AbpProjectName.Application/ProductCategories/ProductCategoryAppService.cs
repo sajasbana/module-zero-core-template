@@ -1,5 +1,6 @@
 ﻿using Abp.Application.Services;
 using Abp.Application.Services.Dto;
+using Abp.Authorization;
 using Abp.Domain.Repositories;
 using AbpCompanyName.AbpProjectName.ProductCategories.Dto;
 using AbpCompanyName.AbpProjectName.Products.Dto;
@@ -26,8 +27,11 @@ namespace AbpCompanyName.AbpProjectName.ProductCategories
             _productCategoryTranslationRepository = productCategoryTranslationRepository;
         }
 
+        [AbpAllowAnonymous]
         public async Task<ListResultDto<ProductCategoryDto>> GetProductCategories()
         {
+            var tenantId = AbpSession.TenantId;
+
             var productCategories = await _productCategoryRepository
                 .GetAllIncluding(p => p.Translations)
                 .ToListAsync();

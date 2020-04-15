@@ -9,14 +9,17 @@ using System.Text;
 namespace AbpCompanyName.AbpProjectName.ProductCategories
 {
     [Table("ProductCategories")]
-    public class ProductCategory : Entity, IMultiLingualEntity<ProductCategoryTranslation>
+    public class ProductCategory : Entity, IMustHaveTenant, IMultiLingualEntity<ProductCategoryTranslation>
     {
-        public ProductCategory(string defaultName, bool isActive = true)
+        public ProductCategory(string defaultName, bool isActive = true, int tenantId = 1)
         {
+            TenantId = tenantId;
             DefaultName = defaultName;
             IsActive = isActive;
         }
 
+        public virtual int TenantId { get; set; }
+        
         //this property is to be show when there is no translation, if you don't want don't put it
         [Required]
         [StringLength(32)]
